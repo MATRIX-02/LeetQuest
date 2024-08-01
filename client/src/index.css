@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  :root {
+    --background: #0e0e0e;
+    --foreground: #F8FAFC;
+
+    --card: #141414;
+    --card-foreground: #F8FAFC;
+
+    --popover: #020817;
+    --popover-foreground: #F8FAFC;
+
+    --primary: #F8FAFC;
+    --primary-foreground: #0F172A;
+
+    --secondary: #1E293B;
+    --secondary-foreground: #F8FAFC;
+
+    --muted: #1E293B;
+    --muted-foreground: #94A3B8;
+
+    --accent: #1E293B;
+    --accent-foreground: #F8FAFC;
+
+    --destructive: #7F1D1D;
+    --destructive-foreground: #F8FAFC;
+
+    --border: #363636;
+    --input: #1E293B;
+    --ring: #CBD5E1;
+  }
+
+  .dark {
+    --background: #FFFFFF;
+    --foreground: #020817;
+
+    --card: #FFFFFF;
+    --card-foreground: #020817;
+
+    --popover: #FFFFFF;
+    --popover-foreground: #020817;
+
+    --primary: #0F172A;
+    --primary-foreground: #F8FAFC;
+
+    --secondary: #F1F5F9;
+    --secondary-foreground: #0F172A;
+
+    --muted: #F1F5F9;
+    --muted-foreground: #64748B;
+
+    --accent: #F1F5F9;
+    --accent-foreground: #0F172A;
+
+    --destructive: #EF4444;
+    --destructive-foreground: #F8FAFC;
+
+    --border: #E2E8F0;
+    --input: #E2E8F0;
+    --ring: #020817;
+
+    --radius: 0.5rem;
+  }
+
+
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.checkbox_container svg {
+  overflow: visible;
+}
+
+.path {
+  fill: none;
+  stroke: white;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+  stroke-dasharray: 241 9999999;
+  stroke-dashoffset: 0;
+}
+
+.checkbox_container input:checked ~ svg .path {
+  stroke-dasharray: 70.5096664428711 9999999;
+  stroke-dashoffset: -262.2723388671875;
+}
