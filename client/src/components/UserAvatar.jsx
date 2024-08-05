@@ -11,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../components/ui/DropdownMenu"
+import api from '../../api';
 
 const UserAvatar = ({ username }) => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const UserAvatar = ({ username }) => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:5000/api/auth/logout', {}, { withCredentials: true });
+      await api.post('/auth/logout', {}, { withCredentials: true });
       navigate('/');
     } catch (error) {
       console.error('Logout failed:', error);

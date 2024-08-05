@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Button } from './ui/Button';
 import { Input } from './ui/Input';
 import FancyCheckbox from './ui/FancyCheckbox';
+import api from '../../api';
 
 const LoginForm = ({ onToggle }) => {
   const [email, setEmail] = useState('');
@@ -14,13 +15,14 @@ const LoginForm = ({ onToggle }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', 
+      const response = await api.post('/auth/login', 
         { email, password, rememberMe }, 
         { withCredentials: true }
       );
       if (response.data.success) {
         navigate('/main');
       } else {
+        console.log(response.data.message);
         alert(response.data.message);
       }
     } catch (error) {

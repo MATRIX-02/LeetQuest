@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from './ui/Button';
 import { Input } from './ui/Input';
+import api from '../../api';
 
 
 const RegisterForm = ({ onToggle }) => {
@@ -19,7 +20,7 @@ const RegisterForm = ({ onToggle }) => {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/signup', { username, email, password }, { withCredentials: true });
+      const response = await api.post('/auth/signup', { username, email, password }, { withCredentials: true });
       if (response.data.success) {
         navigate('/main');
       } else {

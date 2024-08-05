@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import api from '../../api';
 
 const useUserInfo = () => {
   const [user, setUser] = useState(null);
@@ -9,7 +10,7 @@ const useUserInfo = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/auth/userinfo', { withCredentials: true });
+        const response = await api.get('http://localhost:5000/api/auth/userinfo', { withCredentials: true });
         if (response.data.status) {
           setUser(response.data.user);
         }

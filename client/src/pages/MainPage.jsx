@@ -3,6 +3,7 @@ import { Button } from "../components/ui/Button";
 import Header from '../components/Header';
 import axios from 'axios';
 import MyTabs from '../components/Mainpage/Tabs';
+import api from '../../api';
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const MainPage = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:5000/api/auth/logout', {}, { withCredentials: true });
+      await api.post('/auth/logout', {}, { withCredentials: true });
       document.cookie = 'token=; Max-Age=0; path=/; domain=' + window.location.hostname;
       navigate('/');
     } catch (error) {
