@@ -1,4 +1,3 @@
-// middleware/AuthMiddleware.js
 const User = require("../models/UserModel");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
@@ -7,19 +6,23 @@ module.exports.userVerification = (req, res, next) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.json({ status: false });
+    console.log('No token found in cookies');
+    return res.json({ status: false, message: 'No token found in cookies' });
   }
-
+  
   jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
     if (err) {
-      return res.json({ status: false });
+      console.log('Token verification failed:', err);
+      return res.json({ status: false, message: 'Token verification failed' });
     } else {
-      const user = await User.findById(data.id);
+      console.log('Token verified, data:', data);
+      const user = await User.findById(data?.id);
       if (user) {
         req.user = user;
         return next();
       } else {
-        return res.json({ status: false });
+        console.log('User not found with ID:', data.id);
+        return res.json({ status: false, message: 'User not found' });
       }
     }
   });
