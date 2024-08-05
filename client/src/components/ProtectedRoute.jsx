@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }) => {
     const verifyUser = async () => {
       try {
         const response = await api.post('/auth/', {}, { withCredentials: true });
-        console.log(response.data);
+        console.log('Auth response:', response);
         if (response.data.status) {
           setIsAuthenticated(true);
         } else {
