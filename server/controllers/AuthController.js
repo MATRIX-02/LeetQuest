@@ -92,7 +92,6 @@ module.exports.Login = async (req, res, next) => {
       secure: true, // Use secure cookies in production
       sameSite: 'none', // Prevent CSRF attacks
       maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000, // 30 days or 1 day
-      domain: ".leetquest.onrender.com"
     });
 
     res.status(200).json({ 
