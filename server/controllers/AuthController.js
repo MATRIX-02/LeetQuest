@@ -88,9 +88,9 @@ module.exports.Login = async (req, res, next) => {
     const token = createSecretToken(user._id, rememberMe ? "30d" : "1d");
     res.cookie("token", token, {
       withCredentials: true,
-      httpOnly: true,
-      secure: false, // Use secure cookies in production
-      sameSite: 'lax', // Prevent CSRF attacks
+      httpOnly: false,
+      secure: true, // Use secure cookies in production
+      sameSite: 'none', // Prevent CSRF attacks
       maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000, // 30 days or 1 day
       domain: ".leetquest.onrender.com"
     });
