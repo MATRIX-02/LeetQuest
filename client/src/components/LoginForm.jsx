@@ -5,7 +5,7 @@ import { Input } from './ui/Input';
 import FancyCheckbox from './ui/FancyCheckbox';
 import api from '../../api';
 
-const LoginForm = ({ onToggle, onLoginSuccess }) => {
+const LoginForm = ({ onToggle }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -23,7 +23,6 @@ const LoginForm = ({ onToggle, onLoginSuccess }) => {
         { withCredentials: true }
       );
       if (response.data.success) {
-        onLoginSuccess(response.data.user);
         navigate('/main');
       } else {
         setError(response.data.message);
