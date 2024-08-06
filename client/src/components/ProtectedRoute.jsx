@@ -9,8 +9,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        const response = await api.post('/auth/', {}, { withCredentials: true });
-        console.log('Auth response:', response);
+        const response = await api.get('/auth/', { withCredentials: true });
         if (response.data.status) {
           setIsAuthenticated(true);
         } else {
