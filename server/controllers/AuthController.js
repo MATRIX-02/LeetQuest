@@ -87,7 +87,7 @@ module.exports.Login = async (req, res, next) => {
     }
     const token = createSecretToken(user._id, rememberMe ? "30d" : "1d");
     res.cookie("token", token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: true, 
       sameSite: 'lax', 
       maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000, 
