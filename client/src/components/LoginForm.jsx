@@ -19,8 +19,7 @@ const LoginForm = ({ onToggle }) => {
     setError('');
     try {
       const response = await api.post('/auth/login', 
-        { email, password, rememberMe }, 
-        { withCredentials: true }
+        { email, password, rememberMe },
       );
       if (response.data.success) {
         navigate('/main');
