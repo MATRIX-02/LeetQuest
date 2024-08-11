@@ -18,7 +18,7 @@ const { MONGODB_URI } = process.env;
 
 // Middleware
 app.use(cors({
-  origin: ["https://leet-quest.vercel.app", "http://localhost:5173"], 
+  origin: "https://leet-quest.vercel.app", 
   credentials: true 
 }));
 

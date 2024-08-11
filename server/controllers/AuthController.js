@@ -86,6 +86,7 @@ module.exports.Login = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
+      domain: '.leetquest.onrender.com',
       maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
     });
     res.status(200).json({ 
