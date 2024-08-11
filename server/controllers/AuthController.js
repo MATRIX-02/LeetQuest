@@ -84,9 +84,10 @@ module.exports.Login = async (req, res) => {
     const token = createSecretToken(user._id, rememberMe ? "30d" : "1d");
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      domain: '.leetquest.onrender.com',
+      secure: true,
+      sameSite: 'none',
+      domain: 'leetquest.onrender.com',
+      path: '/',
       maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
     });
     res.status(200).json({ 
