@@ -61,12 +61,22 @@ module.exports.Login = async (req, res, next) => {
   }
 };
 
-module.exports.Logout = (req, res, next) => {
+module.exports.Logout = (req, res) => {
   try {
-    res.cookie("token", "", { maxAge: 1 });
-    res.json({ message: "User logged out successfully", success: true });
+    // Clear the token cookie
+    res.cookie("token", "", {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      domain: 'leetquest.onrender.com',
+      path: '/',
+      expires: new Date(0) // Set expiration to the past
+    });
+
+    res.status(200).json({ message: "User logged out successfully", success: true });
   } catch (error) {
-    console.error(error);
+    console.error("Logout error:", error);
+    res.status(500).json({ message: "Error during logout", success: false });
   }
 };
 

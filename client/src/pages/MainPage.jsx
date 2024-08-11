@@ -7,13 +7,10 @@ import api from '../../api';
 
 const MainPage = () => {
   const navigate = useNavigate();
-  
-  console.log(document.cookie)
 
   const handleLogout = async () => {
     try {
       await api.post('/auth/logout', {}, { withCredentials: true });
-      document.cookie = 'token=; Max-Age=0; path=/; domain=' + window.location.hostname;
       navigate('/');
     } catch (error) {
       console.error('Error logging out', error);
