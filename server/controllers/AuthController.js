@@ -71,28 +71,23 @@ module.exports.Logout = (req, res, next) => {
 };
 
 // In the Login function
-module.exports.Login = async (req, res, next) => {
+module.exports.Login = async (req, res) => {
   try {
     const { email, password, rememberMe } = req.body;
     if (!email || !password) {
       return res.status(400).json({ message: "All fields are required", success: false });
     }
     const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(401).json({ message: "Incorrect email or password", success: false });
-    }
-    const auth = await bcrypt.compare(password, user.password);
-    if (!auth) {
+    if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: "Incorrect email or password", success: false });
     }
     const token = createSecretToken(user._id, rememberMe ? "30d" : "1d");
     res.cookie("token", token, {
-      httpOnly: false,
-      secure: true, 
-      sameSite: 'lax', 
-      maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000, 
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
     });
-
     res.status(200).json({ 
       message: "User logged in successfully", 
       success: true,

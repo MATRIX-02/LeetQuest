@@ -8,6 +8,7 @@ import api from '../../api';
 const MainPage = () => {
   const navigate = useNavigate();
   
+  console.log(document.cookie)
 
   const handleLogout = async () => {
     try {

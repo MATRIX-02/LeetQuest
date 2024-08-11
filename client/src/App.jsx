@@ -14,9 +14,8 @@ function App() {
           <Routes>
             <Route path="/" element={<AuthPage />} />
             <Route path="/main" element={
-              <ProtectedRoute>
-                <MainPage />
-              </ProtectedRoute>
+
+              <MainPage />
             } />
           </Routes>
         </Router>
