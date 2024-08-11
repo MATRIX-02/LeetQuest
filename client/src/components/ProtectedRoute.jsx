@@ -24,15 +24,9 @@ const ProtectedRoute = ({ children }) => {
     };
 
     checkAuth();
-    setTimeout(() => {
-      const cookies = document.cookie.split(';');
-      console.log(cookies)
-    }, 5000);
-
   }, [navigate]);
 
   if (isAuthenticated === null) {
-    // Optionally, you can return a loading spinner or some placeholder here`
     return <div>Loading...</div>;
   }
 
