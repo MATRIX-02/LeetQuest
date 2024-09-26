@@ -1,9 +1,9 @@
 // server.js
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const cookieParser = require('cookie-parser');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 
 // Routes
 const authRoute = require("./routes/AuthRoute");
@@ -17,28 +17,32 @@ const app = express();
 const { MONGODB_URI } = process.env;
 
 // Middleware
-app.use(cors({
-  origin: "https://leet-quest.vercel.app", 
-  credentials: true 
-}));
+app.use(
+	cors({
+		// origin: ["https://leet-quest.vercel.app", "http://localhost:5173"],
+		origin: "*",
+		credentials: true,
+	})
+);
 
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(MONGODB_URI)
-.then(() => console.log('MongoDB is connected successfully'))
-.catch((err) => console.log(err));
+mongoose
+	.connect(MONGODB_URI)
+	.then(() => console.log("MongoDB is connected successfully"))
+	.catch((err) => console.log(err));
 
 app.use(cookieParser());
 app.use("/", authRoute);
 
 // Routes
-app.use('/api/auth', authRoute);
-app.use('/api/questions', questionRoute);
-app.use('/api/user-questions', userQuestionRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/questions", questionRoute);
+app.use("/api/user-questions", userQuestionRoute);
 
-app.get('/', (req, res) => {
-    res.send('Welcome to DSA Tracker Server');
+app.get("/", (req, res) => {
+	res.send("Welcome to DSA Tracker Server");
 });
 
 const PORT = process.env.PORT || 5000;
